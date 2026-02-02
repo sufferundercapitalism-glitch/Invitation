@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Valentine 💖</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Manoosha</title>
+    <style>
+        body {
+            background-color: #fce4ec; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Prevents scrollbars if hearts fly around */
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+            z-index: 10; /* Keeps card above background elements */
+        }
+
+        /* This is for the image/GIF */
+        .image-container img {
+            width: 150px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+
+        h1 { color: #444; font-size: 24px; margin-bottom: 30px; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 50px;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background-color: #f0f0f0;
+            color: #888;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            position: absolute;
+            transition: 0.1s;
+        }
+
+        .hint { font-size: 12px; color: #aaa; margin-top: 40px; }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h2>Will you be my Valentine? 💘</h2>
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
-  </div>
+    <div class="card">
+        <div class="image-container">
+            <img id="displayImg" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXNqZzBqbm92ZzRyc3R6ZzRyc3R6ZzRyc3R6ZzRyc3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L95W4M8qO236/giphy.gif" alt="cute cat">
+        </div>
+        
+        <h1>Manoosha, will you be my valentine?</h1>
+        
+        <div class="btn-container">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+        
+        <p class="hint">"No" seems a bit shy 😈</p>
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        const noBtn = document.getElementById('noBtn');
+
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        function celebrate() {
+            // Update the image and text when she clicks Yes
+            document.getElementById('displayImg').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
+            document.querySelector('h1').innerHTML = "Yay! I knew it! ❤️";
+            document.querySelector('.hint').style.display = "none";
+            noBtn.style.display = "none";
+            
+            // This is a simple browser "confetti" alert
+            setTimeout(() => {
+                alert("Best Valentine's Day ever! 🥰");
+            }, 500);
+        }
+    </script>
 </body>
 </html>
