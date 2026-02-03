@@ -1,140 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For ManooLa</title>
-    <style>
-        body {
-            background-color: #fce4ec; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For ManooLa</title>
+<style>
+    body {
+        background-color: #fce4ec; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+    }
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 350px;
-            z-index: 10;
-            transition: transform 0.5s ease; /* card expansion effect */
-        }
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 30px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        text-align: center;
+        width: 350px;
+        z-index: 10;
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        position: relative;
+    }
 
-        .image-container img {
-            width: 150px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-        }
+    .card.active {
+        transform: scale(1.1);
+        box-shadow: 0 25px 50px rgba(255,77,109,0.5);
+    }
 
-        /* NEW IMAGE (hidden at first with fade-in) */
-        #yesPhoto {
-            width: 220px;
-            margin-top: 20px;
-            border-radius: 20px;
-            opacity: 0;               
-            transition: opacity 1s ease-in-out;  /* smooth fade-in */
-        }
+    .image-container img {
+        width: 150px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+    }
 
-        h1 { color: #444; font-size: 24px; margin-bottom: 30px; }
+    /* NEW PHOTOS (hidden at first) */
+    .yesPhoto {
+        width: 220px;
+        margin: 15px auto;
+        border-radius: 20px;
+        opacity: 0;               
+        transition: opacity 1.2s ease-in-out;
+        display: block;
+    }
 
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            height: 50px;
-        }
+    h1 { color: #444; font-size: 24px; margin-bottom: 20px; }
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        height: 50px;
+    }
 
-        #noBtn {
-            background-color: #f0f0f0;
-            color: #888;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 25px;
-            position: absolute;
-            transition: 0.1s;
-        }
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        font-size: 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.2s ease;
+    }
 
-        .hint { font-size: 12px; color: #aaa; margin-top: 40px; }
-    </style>
+    #yesBtn:hover {
+        transform: scale(1.05);
+    }
+
+    #noBtn {
+        background-color: #f0f0f0;
+        color: #888;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 25px;
+        position: absolute;
+        transition: 0.1s;
+    }
+
+    .hint { font-size: 12px; color: #aaa; margin-top: 30px; }
+
+    .message {
+        font-size: 18px;
+        color: #ff4d6d;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+</style>
 </head>
 <body>
 
-    <div class="card" id="card">
-        <div class="image-container">
-            <img id="displayImg"
-                 src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXNqZzBqbm92ZzRyc3R6ZzRyc3R6ZzRyc3R6ZzRyc3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L95W4M8qO236/giphy.gif"
-                 alt="cute cat">
-        </div>
-
-        <h1>ManooLa, will you be my valentine?</h1>
-
-        <div class="btn-container">
-            <button id="yesBtn" onclick="celebrate()">Yes</button>
-            <button id="noBtn">No</button>
-        </div>
-
-        <p class="hint">"No" seems a bit shy 😈</p>
-
-        <!-- NEW IMAGE THAT APPEARS AFTER YES -->
-        <img id="yesPhoto" src="MAnal" alt="Our photo">
+<div class="card" id="card">
+    <div class="image-container">
+        <img id="displayImg"
+             src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXNqZzBqbm92ZzRyc3R6ZzRyc3R6ZzRyc3R6ZzRyc3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L95W4M8qO236/giphy.gif"
+             alt="cute cat">
     </div>
 
-    <script>
-        const noBtn = document.getElementById('noBtn');
-        const card = document.getElementById('card');
-        const yesPhoto = document.getElementById('yesPhoto');
+    <h1>ManooLa, will you be my valentine?</h1>
 
-        // move NO button
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+    <!-- THREE PHOTOS -->
+    <img id="photo1" class="yesPhoto" src="MANAL CAR" alt="Photo 1" style="display:none;">
+    <img id="photo2" class="yesPhoto" src="Manal 2" alt="Photo 2" style="display:none;">
+    <img id="photo3" class="yesPhoto" src="manal flowers" alt="Photo 3" style="display:none;">
+
+    <div class="btn-container">
+        <button id="yesBtn" onclick="celebrate()">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <p class="hint">"No" seems a bit shy 😈</p>
+    <p class="message" id="message">You made my heart so happy! ❤️</p>
+</div>
+
+<script>
+    const noBtn = document.getElementById('noBtn');
+    const card = document.getElementById('card');
+    const photos = [
+        document.getElementById('photo1'),
+        document.getElementById('photo2'),
+        document.getElementById('photo3')
+    ];
+    const message = document.getElementById('message');
+
+    // Move NO button randomly
+    noBtn.addEventListener('mouseover', () => {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    });
+
+    function celebrate() {
+        // Change main GIF
+        document.getElementById('displayImg').src =
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
+
+        // Update title and hide hint
+        document.querySelector('h1').innerHTML = "Yay! I knew it! ❤️";
+        document.querySelector('.hint').style.display = "none";
+        noBtn.style.display = "none";
+
+        // Card glow & scale
+        card.classList.add('active');
+
+        // Fade in photos one by one
+        photos.forEach((photo, index) => {
+            setTimeout(() => {
+                photo.style.display = "block";
+                setTimeout(() => { photo.style.opacity = 1; }, 50);
+            }, 500 * index); // each appears 0.5s after the previous
         });
 
-        function celebrate() {
-            // change main GIF
-            document.getElementById('displayImg').src =
-                "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
+        // Show romantic message after all photos
+        setTimeout(() => {
+            message.style.opacity = 1;
+        }, 500 * photos.length + 300);
 
-            // update title and hide hint
-            document.querySelector('h1').innerHTML = "Yay! b7bikk Manoola ! ❤️";
-            document.querySelector('.hint').style.display = "none";
-            noBtn.style.display = "none";
+    }
+</script>
 
-            // optional: card expansion
-            card.style.transform = "scale(1.05)";
-
-            // FADE-IN the photo
-            yesPhoto.style.display = "block";   // make it visible first
-            setTimeout(() => {
-                yesPhoto.style.opacity = 1;     // trigger the fade-in
-            }, 100); // slight delay needed for transition
-
-            setTimeout(() => {
-                alert("Best far away Valentine's Day ever! 🥰");
-            }, 500);
-        }
-    </script>
 </body>
 </html>
