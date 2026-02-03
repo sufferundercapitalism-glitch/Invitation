@@ -24,7 +24,7 @@
             text-align: center;
             width: 350px;
             z-index: 10;
-            transition: transform 0.5s ease; /* optional for card expansion effect */
+            transition: transform 0.5s ease; /* card expansion effect */
         }
 
         .image-container img {
@@ -35,7 +35,6 @@
 
         /* NEW IMAGE (hidden at first with fade-in) */
         #yesPhoto {
-            display: none;
             width: 220px;
             margin-top: 20px;
             border-radius: 20px;
@@ -96,14 +95,16 @@
 
         <p class="hint">"No" seems a bit shy 😈</p>
 
-        <!-- ✅ NEW IMAGE THAT APPEARS AFTER YES -->
-        <img id="yesPhoto" src="MAnal.jpg" alt="Our photo">
+        <!-- NEW IMAGE THAT APPEARS AFTER YES -->
+        <img id="yesPhoto" src="MAnal" alt="Our photo">
     </div>
 
     <script>
         const noBtn = document.getElementById('noBtn');
         const card = document.getElementById('card');
+        const yesPhoto = document.getElementById('yesPhoto');
 
+        // move NO button
         noBtn.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -117,22 +118,21 @@
                 "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
 
             // update title and hide hint
-            document.querySelector('h1').innerHTML = "Yay! I knew it! ❤️";
+            document.querySelector('h1').innerHTML = "Yay! b7bikk Manoola ! ❤️";
             document.querySelector('.hint').style.display = "none";
             noBtn.style.display = "none";
 
             // optional: card expansion
             card.style.transform = "scale(1.05)";
 
-            // show & fade-in new image
-            const yesPhoto = document.getElementById('yesPhoto');
-            yesPhoto.style.display = "block";
+            // FADE-IN the photo
+            yesPhoto.style.display = "block";   // make it visible first
             setTimeout(() => {
-                yesPhoto.style.opacity = 1;
-            }, 50);
+                yesPhoto.style.opacity = 1;     // trigger the fade-in
+            }, 100); // slight delay needed for transition
 
             setTimeout(() => {
-                alert("Best Valentine's Day ever! 🥰");
+                alert("Best far away Valentine's Day ever! 🥰");
             }, 500);
         }
     </script>
