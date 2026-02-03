@@ -46,7 +46,8 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
-        height: 50px;
+        margin-top: 20px;
+        position: relative; /* for NO button movement */
     }
 
     #yesBtn {
@@ -72,7 +73,8 @@
         padding: 10px 20px;
         font-size: 16px;
         border-radius: 25px;
-        position: absolute;
+        cursor: pointer;
+        position: relative; /* changed from absolute */
         transition: 0.1s;
     }
 
@@ -105,7 +107,7 @@
     </div>
 
     <p class="hint">"No" seems a bit shy 😈</p>
-    <p class="message" id="message">You are the love of my life! ❤️</p>
+    <p class="message" id="message">You made my heart so happy! ❤️</p>
 </div>
 
 <script>
@@ -113,12 +115,13 @@
     const card = document.getElementById('card');
     const message = document.getElementById('message');
 
-    // Move NO button randomly
+    // Move NO button randomly but keep it within container
     noBtn.addEventListener('mouseover', () => {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = x + 'px';
-        noBtn.style.top = y + 'px';
+        const container = noBtn.parentElement; // btn-container
+        const maxX = container.clientWidth - noBtn.offsetWidth;
+        const maxY = 0; // keep Y fixed to stay side by side
+        const x = Math.random() * maxX;
+        noBtn.style.transform = `translateX(${x}px)`;
     });
 
     function celebrate() {
@@ -127,7 +130,7 @@
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
 
         // Update title and hide hint
-        document.querySelector('h1').innerHTML = "Yay! B7BIK MANoooLA! ❤️";
+        document.querySelector('h1').innerHTML = "Yay! I knew it! ❤️";
         document.querySelector('.hint').style.display = "none";
         noBtn.style.display = "none";
 
@@ -138,7 +141,6 @@
         setTimeout(() => {
             message.style.opacity = 1;
         }, 500);
-
     }
 </script>
 
