@@ -39,16 +39,6 @@
         border-radius: 15px;
     }
 
-    /* NEW PHOTOS (hidden at first) */
-    .yesPhoto {
-        width: 220px;
-        margin: 15px auto;
-        border-radius: 20px;
-        opacity: 0;               
-        transition: opacity 1.2s ease-in-out;
-        display: block;
-    }
-
     h1 { color: #444; font-size: 24px; margin-bottom: 20px; }
 
     .btn-container {
@@ -109,28 +99,18 @@
 
     <h1>ManooLa, will you be my valentine?</h1>
 
-    <!-- THREE PHOTOS -->
-    <img id="photo1" class="yesPhoto" src="MANAL CAR" alt="Photo 1" style="display:none;">
-    <img id="photo2" class="yesPhoto" src="Manal 2" alt="Photo 2" style="display:none;">
-    <img id="photo3" class="yesPhoto" src="manal flowers" alt="Photo 3" style="display:none;">
-
     <div class="btn-container">
         <button id="yesBtn" onclick="celebrate()">Yes</button>
         <button id="noBtn">No</button>
     </div>
 
     <p class="hint">"No" seems a bit shy 😈</p>
-    <p class="message" id="message">You made my heart so happy! ❤️</p>
+    <p class="message" id="message">You are the love of my life! ❤️</p>
 </div>
 
 <script>
     const noBtn = document.getElementById('noBtn');
     const card = document.getElementById('card');
-    const photos = [
-        document.getElementById('photo1'),
-        document.getElementById('photo2'),
-        document.getElementById('photo3')
-    ];
     const message = document.getElementById('message');
 
     // Move NO button randomly
@@ -147,25 +127,17 @@
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26FLdmIp6wJr91JAI/giphy.gif";
 
         // Update title and hide hint
-        document.querySelector('h1').innerHTML = "Yay! I knew it! ❤️";
+        document.querySelector('h1').innerHTML = "Yay! B7BIK MANoooLA! ❤️";
         document.querySelector('.hint').style.display = "none";
         noBtn.style.display = "none";
 
         // Card glow & scale
         card.classList.add('active');
 
-        // Fade in photos one by one
-        photos.forEach((photo, index) => {
-            setTimeout(() => {
-                photo.style.display = "block";
-                setTimeout(() => { photo.style.opacity = 1; }, 50);
-            }, 500 * index); // each appears 0.5s after the previous
-        });
-
-        // Show romantic message after all photos
+        // Show romantic message
         setTimeout(() => {
             message.style.opacity = 1;
-        }, 500 * photos.length + 300);
+        }, 500);
 
     }
 </script>
